@@ -42,6 +42,7 @@ public struct FirestoreContext<T: Codable & Firestorable & Equatable> {
     @discardableResult public static func query(collectionPath: String, predicates: [QueryPredicate], lastDocumentSnapshot: Binding<DocumentSnapshot?>) async throws -> [T] {
         let query: Query = getQuery(path: collectionPath, predicates: predicates)
         if let lastDocumentSnapshot = lastDocumentSnapshot.wrappedValue {
+            print("Last doc snapshot id: \(lastDocumentSnapshot.documentID)")
             query.start(afterDocument: lastDocumentSnapshot)
         }
         let snapshot = try await query.getDocuments()
