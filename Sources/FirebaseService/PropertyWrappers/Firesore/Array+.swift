@@ -33,7 +33,7 @@ public extension Array where Element: Codable & Firestorable & Equatable {
     mutating func update(_ document: Element, with newDocument: Element, collectionPath: String) throws -> Array  {
         let newElement = try FirestoreContext.update(newDocument, collectionPath: collectionPath)
         if let index = self.firstIndex(of: document) {
-            self[index] = newElement
+            if let newElement { self[index] = newElement }
         }
         return self
     }
