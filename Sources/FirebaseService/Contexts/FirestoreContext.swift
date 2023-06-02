@@ -48,7 +48,7 @@ public struct FirestoreContext<T: Codable & Firestorable & Equatable> {
         let documents = snapshot.documents.compactMap { document in
             try? document.data(as: T.self)
         }
-        lastDocumentSnapshot.wrappedValue = snapshot.documents.first
+        lastDocumentSnapshot.wrappedValue = snapshot.documents.last
         return documents
     }
     
